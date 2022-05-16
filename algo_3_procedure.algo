@@ -1,0 +1,44 @@
+PROCEDURE fill_vector(Var v:TYPE_OF INTEGER);
+VAR
+   i:  INTEGER;
+BEGIN
+   FOR i FROM 1 TO 10 PATH 1 Do
+      BEGIN
+         Write('donner l''élement n°',i,'= ');
+         Read(v[i]);
+      END;
+END;
+
+PROCEDURE dot_product(v1,v2: TYPE_OF INTEGER)
+VAR
+	dotprod,i : INTEGER;
+BEGIN
+	IF (v1.length != v2.length)THEN
+        	Write ("can't find dot product: arrays have different lengths");
+	END_IF
+    	dotprod = 0;
+    	FOR i FROM 0 TO v1.length-1 PATH 1 DO
+        	dotprod += v1[i] * v2[i];
+	END_FOR
+	Write("The dot product of v1 and v2 is ",dotprod);
+END;
+
+ALGORITHME Dot_product
+VAR
+	v1,v2 : TYPE OF INTEGER [10];
+	n,i : INTEGER;
+	orthogonal : BOOLEAN;
+BEGIN 
+	READ(n);
+	FOR i FROM 1 TO n PATH 1 DO
+		BEGIN
+			fill_vector(v1);
+			fill_vector(v2);
+			orthogonal := False;
+			WHILE (dot_product(v1,v2) = 0) DO
+        			orthogonal := True;
+				i++;
+			END_WHILE;
+		END;
+	END_FOR;	
+END.
